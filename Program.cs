@@ -20,18 +20,18 @@ namespace Poistring_Example
             //dont worry about just know that it is needed before anything else runs
             KnowledgeManager.InitializeStructure();
             //replace this with the example you want to run
-            Console.WriteLine(CustomPotionExample());
+            Console.WriteLine(WeaponExample4());
             //this stops the console window from instantly closing when everything executes
             while (true)
             {
 
             }
-            
+
         }
         //COMPLETE
         static string ConcoctionCrateExample()
         {
-            
+
             NetworkPrefab prefab = new NetworkPrefab()
             {
                 //within this context you use a comma instead of semicolon 
@@ -81,9 +81,9 @@ namespace Poistring_Example
             NetworkPrefab prefab = PoiDecoder.GetPrefabFromString(StringToDecompile);
             //to find what number to use for the component array place a break point on a line after this one then hover over prefab
             //the ide will give you a dropdown you can navigate, easiest example is to put a break point on the return line below
-            
-            
-            
+
+
+
             //prefab.Components[0]
 
 
@@ -157,16 +157,238 @@ namespace Poistring_Example
             };
             return PoiStentions.GetAsATTString(prefab);
         }
-        //INCOMPLETE
-        //static string WeaponExample1()
-        //{
-        //    //now for what you probably downloaded this for in the first place, custom weapons
-        //    NetworkPrefab prefab = new NetworkPrefab()
-        //    {
+        //COMPLETE
+        static string WeaponExample1()
+        {
+            //now for what you probably downloaded this for in the first place, custom weapons
+            NetworkPrefab prefab = new NetworkPrefab()
+            {
+                PrefabHash = Prefabs.HandleShortCool.Hash,
 
-        //    };
-        //}
+                Children = new List<ChildNetworkPrefab>()
+                {
+                    new ChildNetworkPrefab()
+                    {
+                        //this has to be the hash of the slot for the prefab used by the parent (woo strange words!)
+                        parentHash = Prefabs.HandleShortCool.Embeds.SlotMulti_48480.Hash,
+                        Prefab = new NetworkPrefab()
+                        {
+                            PrefabHash = Prefabs.LargeGuardRectangle.Hash,
+                            Components = new List<PoiString.AttTypes.Components.ATTSerializableComponent>()
+                            {
+                                new PoiString.AttTypes.Components.PhysicalMaterialPart()
+                                {
+                                    Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                                }
+                            },
+                            Children = new List<ChildNetworkPrefab>()
+                            {
+                                new ChildNetworkPrefab()
+                                {
+                                    parentHash = Prefabs.LargeGuardRectangle.Embeds.InsertLargeSwordTypeCraft_51894.Hash,
+                                    Prefab = new NetworkPrefab()
+                                    {
+                                        PrefabHash = Prefabs.LargeLongswordBlade.Hash,
+                                        Components = new List<ATTSerializableComponent>()
+                                        {
+                                            new PhysicalMaterialPart()
+                                            {
+                                                Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            return PoiStentions.GetAsATTString(prefab);
+        }
 
+        //COMPLETE
+        static string WeaponExample2()
+        {
+            //now you dont have to make weapons all in one big block, you can spread it out
+
+            NetworkPrefab GuardAndBlade = new NetworkPrefab
+            {
+
+                PrefabHash = Prefabs.LargeGuardRectangle.Hash,
+                Components = new List<PoiString.AttTypes.Components.ATTSerializableComponent>()
+                {
+                    new PoiString.AttTypes.Components.PhysicalMaterialPart()
+                    {
+                        Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                    }
+                },
+                Children = new List<ChildNetworkPrefab>()
+                {
+                    new ChildNetworkPrefab()
+                    {
+                        //make sure you use SLOTS not INSERTS
+                        parentHash = Prefabs.LargeGuardRectangle.Embeds.SlotLargeSwordType_51896.Hash,
+                        Prefab = new NetworkPrefab()
+                        {
+                            PrefabHash = Prefabs.LargeLongswordBlade.Hash,
+                            Components = new List<ATTSerializableComponent>()
+                            {
+                                new PhysicalMaterialPart()
+                                {
+                                    Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                                }
+                            }
+                        }
+                    }
+
+                }
+            };
+
+            NetworkPrefab prefab = new NetworkPrefab()
+            {
+                PrefabHash = Prefabs.HandleShortCool.Hash,
+
+                Children = new List<ChildNetworkPrefab>()
+                {
+                    new ChildNetworkPrefab()
+                    {
+                        //this has to be the hash of the slot for the prefab used by the parent (woo strange words!)
+                        parentHash = Prefabs.HandleShortCool.Embeds.SlotMulti_48480.Hash,
+                        Prefab = GuardAndBlade
+
+                    }
+                }
+            };
+            return PoiStentions.GetAsATTString(prefab);
+        }
+        //COMPLETE
+        static string WeaponExample3()
+        {
+            //using variables is more useful when you are using branching adapters 
+            //this is also a slightly different way to use varialbes that is likely more useful
+            NetworkPrefab prefab = new NetworkPrefab()
+            {
+                PrefabHash = Prefabs.HandleShortCool.Hash,
+
+                Children = new List<ChildNetworkPrefab>()
+                {
+                    new ChildNetworkPrefab()
+                    {
+                        //this has to be the hash of the slot for the prefab used by the parent (woo strange words!)
+                        parentHash = Prefabs.HandleShortCool.Embeds.SlotMulti_48480.Hash,
+                        Prefab = new NetworkPrefab()
+                        {
+                            PrefabHash = Prefabs.CraftPieceSideFlat2Way.Hash,
+                            Components = new List<PoiString.AttTypes.Components.ATTSerializableComponent>()
+                            {
+                                new PoiString.AttTypes.Components.PhysicalMaterialPart()
+                                {
+                                    Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                                }
+                            },
+                            Children = new List<ChildNetworkPrefab>()
+                        }
+                    }
+                }
+            };
+            NetworkPrefab blade = new NetworkPrefab()
+            {
+                PrefabHash = Prefabs.ShortSwordBlade.Hash,
+                Components = new List<ATTSerializableComponent>()
+                {
+                    new PhysicalMaterialPart()
+                    {
+                        Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                    }
+                }
+            };
+
+            //prefab - get the first child object(the guard) - get that children object and add to it 
+            prefab.Children[0].Prefab.Children.Add(new ChildNetworkPrefab
+            {
+                //with this its kind of hard to know what slot is where sooo... good luuuuck!
+                parentHash = Prefabs.CraftPieceSideFlat2Way.Embeds.SlotEdgeType_39368.Hash,
+                Prefab = blade
+            });
+            prefab.Children[0].Prefab.Children.Add(new ChildNetworkPrefab
+            {
+                parentHash = Prefabs.CraftPieceSideFlat2Way.Embeds.SlotEdgeType_51672.Hash,
+                Prefab = blade
+            });
+
+            return PoiStentions.GetAsATTString(prefab);
+        }
+        //COMPLETE
+        static string WeaponExample4()
+        {
+            //now something barely anyone knows about is the fact you can use loops to make stuff
+            //so i am about to singlehandedly mess up stringed weapons for a few weeks because i know everyone is going to do this till yall settle down a bit
+
+            NetworkPrefab HandleAndGuard = new NetworkPrefab()
+            {
+                PrefabHash = Prefabs.HandleShortCool.Hash,
+                Children = new List<ChildNetworkPrefab>()
+                {
+                    new ChildNetworkPrefab()
+                    {
+                        parentHash = Prefabs.HandleShortCool.Embeds.SlotMulti_48480.Hash,
+                        Prefab = new NetworkPrefab()
+                        {
+                            PrefabHash = Prefabs.LargeGuardRectangle.Hash,
+                            Components = new List<PoiString.AttTypes.Components.ATTSerializableComponent>()
+                            {
+                                new PoiString.AttTypes.Components.PhysicalMaterialPart()
+                                {
+                                    Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            //this is a variable targeting where we want to work on the prefab
+            //stuff might be getting a little confusing by here eh? 
+            NetworkPrefab pointer = HandleAndGuard.Children[0].Prefab;
+            //repeat 10 times
+            for (int i = 0; i < 10; i++)
+            {
+                pointer.Children.Add(new ChildNetworkPrefab
+                {
+                    parentHash = Prefabs.LargeGuardRectangle.Embeds.SlotLargeSwordType_51896.Hash,
+                    Prefab = new NetworkPrefab()
+                    {
+                        PrefabHash = Prefabs.LargeGuardRectangle.Hash,
+                        Components = new List<ATTSerializableComponent>()
+                        {
+                            new PhysicalMaterialPart()
+                            {
+                                Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                            }
+                        }
+                    }
+                });
+                pointer = pointer.Children[0].Prefab;
+            }
+            pointer.Children.Add(new ChildNetworkPrefab
+            {
+                parentHash = Prefabs.LargeGuardRectangle.Embeds.SlotLargeSwordType_51896.Hash,
+                Prefab = new NetworkPrefab()
+                {
+                    PrefabHash = Prefabs.LargeLongswordBlade.Hash,
+                    Components = new List<ATTSerializableComponent>()
+                        {
+                            new PhysicalMaterialPart()
+                            {
+                                Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
+                            }
+                        }
+                }
+            });
+
+
+
+            return PoiStentions.GetAsATTString(HandleAndGuard);
+        }
 
 
 
