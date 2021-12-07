@@ -15,7 +15,7 @@ The easy way to get into poistring
 # Troubleshooting 
 - If in step 6 you dont see program.cs you may not have the solution explorer open, to open the solution explorer go to the top of visual studio select view then solution explorer
 - If visual studio opens and there is no code on the screen go to the top of the screen select View, then Solution Explorer, in this select program.cs
-- If you follow the above steps and dont see program.cs and there is something that says unloaded try right clicking that and.... like reload it idk only had one person with this issue and they didnt explain how they fixed it very wel
+- If you follow the above steps and dont see program.cs and there is something that says unloaded try right clicking that and.... like reload it idk only had one person with this issue and they didnt explain how they fixed it very well
 - If you are still having issues after CAREFULLY reading this guide find me in the A Township Tale server, yep thats me the spoooooky yellow name with the name poi (or something like that)
 
 If you are a developer and want to intergrate poistring in your project you can get the latest dll from https://github.com/officialpoiuytrewq4645/Poistring
