@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using PoiString;
 using PoiString.AttTypes;
-using PoiString.AttTypes.Components.ValueTypes;
-using PoiString.Knowledge;
 using PoiString.AttTypes.Components;
+using PoiString.Knowledge;
 
 namespace Poistring_Example
 {
@@ -20,7 +16,7 @@ namespace Poistring_Example
             //dont worry about just know that it is needed before anything else runs
             KnowledgeManager.InitializeStructure();
             //replace this with the example you want to run
-            Console.WriteLine(WeaponExample4());
+            Console.WriteLine(WeaponExample2());
             //this stops the console window from instantly closing when everything executes
             while (true)
             {
@@ -28,6 +24,25 @@ namespace Poistring_Example
             }
 
         }
+
+
+
+
+        //COMPLETE
+        //use this as a place to write your own items
+        static string Workspace()
+        {
+            //empty prefab for you to mess with however you want, for understanding how to use this, read the reast of this file
+            NetworkPrefab prefab = new NetworkPrefab()
+            {
+
+            };
+
+            //convert from prefab to att string
+            return PoiStentions.GetAsATTString(prefab);
+        }
+
+
         //COMPLETE
         static string ConcoctionCrateExample()
         {
@@ -124,9 +139,10 @@ namespace Poistring_Example
                         {
                             color = new Color()
                             {
-                                r = 1,
-                                g = 0,
-                                b = 0,
+                                //values between 0 and 1, any decimal numbers need f at the end to define them as a float instead of a double
+                                r = 0.75f,
+                                g = 1,
+                                b = 0.34f,
                                 a = 1
                             },
                             effects = new Effect[]
@@ -169,6 +185,15 @@ namespace Poistring_Example
                 {
                     new ChildNetworkPrefab()
                     {
+                        parentHash = Prefabs.HandleShortCool.Embeds.SlotEdgeTypeCraft_43890.Hash,
+                        Prefab = new NetworkPrefab()
+                        {
+                            PrefabHash = Prefabs.LargeLongswordBlade.Hash,
+                        }
+
+                    },
+                    new ChildNetworkPrefab()
+                    {
                         //this has to be the hash of the slot for the prefab used by the parent (woo strange words!)
                         parentHash = Prefabs.HandleShortCool.Embeds.SlotMulti_48480.Hash,
                         Prefab = new NetworkPrefab()
@@ -205,7 +230,6 @@ namespace Poistring_Example
             };
             return PoiStentions.GetAsATTString(prefab);
         }
-
         //COMPLETE
         static string WeaponExample2()
         {
@@ -376,23 +400,17 @@ namespace Poistring_Example
                 {
                     PrefabHash = Prefabs.LargeLongswordBlade.Hash,
                     Components = new List<ATTSerializableComponent>()
+                    {
+                        new PhysicalMaterialPart()
                         {
-                            new PhysicalMaterialPart()
-                            {
-                                Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
-                            }
+                            Hash = (int)Knowledge.PhysicalMaterial.EvinonSteelAlloy
                         }
+                    }
                 }
             });
 
-
-
             return PoiStentions.GetAsATTString(HandleAndGuard);
         }
-
-
-
-
 
 
 
