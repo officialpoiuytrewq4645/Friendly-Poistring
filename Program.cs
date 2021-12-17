@@ -30,6 +30,9 @@ namespace Poistring_Example
 
         //COMPLETE
         //use this as a place to write your own items
+        //remember to get this item to run you have to edit line 19 to be the method you want in this case Workspace() 
+        //so line 19 would be 
+        //Console.WriteLine(Workspace());
         static string Workspace()
         {
             //empty prefab for you to mess with however you want, for understanding how to use this, read the reast of this file
